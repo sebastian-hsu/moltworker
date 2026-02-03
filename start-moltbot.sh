@@ -307,7 +307,7 @@ if (isGemini) {
     config.agents.defaults.models = config.agents.defaults.models || {};
     config.agents.defaults.models['openrouter/google/gemini-3-flash-preview'] = { alias: 'Gemini 3 Flash' };
     config.agents.defaults.models['openrouter/google/gemini-3-pro-preview'] = { alias: 'Gemini 3 Pro' };
-    config.agents.defaults.models['openrouter/google/gemini-3-pro-image-preview'] = { alias: 'Gemini 3 Pro Image' };
+    config.agents.defaults.models['openrouter/google/gemini-3-pro-image-preview'] = { alias: 'Nano Banana 3 Pro Image' };
     config.agents.defaults.models['openrouter/anthropic/claude-sonnet-4.5'] = { alias: 'Claude Sonnet 4.5' };
     config.agents.defaults.models['openrouter/anthropic/claude-haiku-4.5'] = { alias: 'Claude Haiku 4.5' };
     config.agents.defaults.model.primary = 'openrouter/google/gemini-3-flash-preview';
