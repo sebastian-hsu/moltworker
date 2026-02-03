@@ -14,6 +14,8 @@ export interface MoltbotEnv {
   ANTHROPIC_API_KEY?: string;
   ANTHROPIC_BASE_URL?: string;
   OPENAI_API_KEY?: string;
+  GEMINI_API_KEY?: string; // Google Gemini API key
+  OPENROUTER_API_KEY?: string; // OpenRouter API key
   MOLTBOT_GATEWAY_TOKEN?: string; // Gateway token (mapped to CLAWDBOT_GATEWAY_TOKEN for container)
 
   CLAWDBOT_BIND_MODE?: string;
@@ -23,6 +25,7 @@ export interface MoltbotEnv {
   SANDBOX_SLEEP_AFTER?: string; // How long before sandbox sleeps: 'never' (default), or duration like '10m', '1h'
   TELEGRAM_BOT_TOKEN?: string;
   TELEGRAM_DM_POLICY?: string;
+  TELEGRAM_DM_ALLOW_FROM?: string; // Comma-separated list of allowed Telegram user IDs
   DISCORD_BOT_TOKEN?: string;
   DISCORD_DM_POLICY?: string;
   SLACK_BOT_TOKEN?: string;

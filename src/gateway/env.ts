@@ -12,12 +12,15 @@ export function buildEnvVars(env: MoltbotEnv): Record<string, string> {
   // Normalize the base URL by removing trailing slashes
   const normalizedBaseUrl = env.AI_GATEWAY_BASE_URL?.replace(/\/+$/, '');
   const isOpenAIGateway = normalizedBaseUrl?.endsWith('/openai');
+  const isGeminiGateway = normalizedBaseUrl?.endsWith('/google-ai-studio');
 
   // AI Gateway vars take precedence
   // Map to the appropriate provider env var based on the gateway endpoint
   if (env.AI_GATEWAY_API_KEY) {
     if (isOpenAIGateway) {
       envVars.OPENAI_API_KEY = env.AI_GATEWAY_API_KEY;
+    } else if (isGeminiGateway) {
+      envVars.GEMINI_API_KEY = env.AI_GATEWAY_API_KEY;
     } else {
       envVars.ANTHROPIC_API_KEY = env.AI_GATEWAY_API_KEY;
     }
@@ -30,6 +33,12 @@ export function buildEnvVars(env: MoltbotEnv): Record<string, string> {
   if (!envVars.OPENAI_API_KEY && env.OPENAI_API_KEY) {
     envVars.OPENAI_API_KEY = env.OPENAI_API_KEY;
   }
+  if (!envVars.GEMINI_API_KEY && env.GEMINI_API_KEY) {
+    envVars.GEMINI_API_KEY = env.GEMINI_API_KEY;
+  }
+  if (env.OPENROUTER_API_KEY) {
+    envVars.OPENROUTER_API_KEY = env.OPENROUTER_API_KEY;
+  }
 
   // Pass base URL (used by start-moltbot.sh to determine provider)
   if (normalizedBaseUrl) {
@@ -37,6 +46,8 @@ export function buildEnvVars(env: MoltbotEnv): Record<string, string> {
     // Also set the provider-specific base URL env var
     if (isOpenAIGateway) {
       envVars.OPENAI_BASE_URL = normalizedBaseUrl;
+    } else if (isGeminiGateway) {
+      envVars.GEMINI_BASE_URL = normalizedBaseUrl;
     } else {
       envVars.ANTHROPIC_BASE_URL = normalizedBaseUrl;
     }
@@ -49,6 +60,7 @@ export function buildEnvVars(env: MoltbotEnv): Record<string, string> {
   if (env.CLAWDBOT_BIND_MODE) envVars.CLAWDBOT_BIND_MODE = env.CLAWDBOT_BIND_MODE;
   if (env.TELEGRAM_BOT_TOKEN) envVars.TELEGRAM_BOT_TOKEN = env.TELEGRAM_BOT_TOKEN;
   if (env.TELEGRAM_DM_POLICY) envVars.TELEGRAM_DM_POLICY = env.TELEGRAM_DM_POLICY;
+  if (env.TELEGRAM_DM_ALLOW_FROM) envVars.TELEGRAM_DM_ALLOW_FROM = env.TELEGRAM_DM_ALLOW_FROM;
   if (env.DISCORD_BOT_TOKEN) envVars.DISCORD_BOT_TOKEN = env.DISCORD_BOT_TOKEN;
   if (env.DISCORD_DM_POLICY) envVars.DISCORD_DM_POLICY = env.DISCORD_DM_POLICY;
   if (env.SLACK_BOT_TOKEN) envVars.SLACK_BOT_TOKEN = env.SLACK_BOT_TOKEN;
