@@ -16,6 +16,7 @@ export interface MoltbotEnv {
   OPENAI_API_KEY?: string;
   GEMINI_API_KEY?: string; // Google Gemini API key
   OPENROUTER_API_KEY?: string; // OpenRouter API key
+  TAVILY_API_KEY?: string; // Tavily search API key
   MOLTBOT_GATEWAY_TOKEN?: string; // Gateway token (mapped to CLAWDBOT_GATEWAY_TOKEN for container)
 
   CLAWDBOT_BIND_MODE?: string;
