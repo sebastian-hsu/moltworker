@@ -348,6 +348,20 @@ if (process.env.BRAVE_API_KEY) {
     };
 }
 
+// Configure Cloudflare Browser Rendering if CDP_SECRET and WORKER_URL are provided
+if (process.env.CDP_SECRET && process.env.WORKER_URL) {
+    console.log('Configuring Cloudflare Browser Rendering');
+    const cdpUrl = process.env.WORKER_URL + '/cdp?secret=' + encodeURIComponent(process.env.CDP_SECRET);
+    config.browser = config.browser || {};
+    config.browser.enabled = true;
+    config.browser.defaultProfile = 'cloudflare';
+    config.browser.profiles = config.browser.profiles || {};
+    config.browser.profiles.cloudflare = {
+        cdpUrl: cdpUrl,
+        color: '#F6821F'  // Cloudflare orange
+    };
+}
+
 // Write updated config
 fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 console.log('Configuration updated successfully');
