@@ -42,6 +42,9 @@ export function buildEnvVars(env: MoltbotEnv): Record<string, string> {
   if (env.TAVILY_API_KEY) {
     envVars.TAVILY_API_KEY = env.TAVILY_API_KEY;
   }
+  if (env.BRAVE_API_KEY) {
+    envVars.BRAVE_API_KEY = env.BRAVE_API_KEY;
+  }
 
   // Pass base URL (used by start-moltbot.sh to determine provider)
   if (normalizedBaseUrl) {
